@@ -3,23 +3,33 @@ package com.example.flixster.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //this class has defines a movie object
+@Parcel
 public class Movie {
     String backdropPath;
     String posterPath;
     String title;
     String overview;
+    int movieId;
+    double popularity;
 
-    // This method receives a json object and initialize the movie variables whit the data from the json resonse
+
+    // Create an empty constructor for the Parceler library
+    public Movie(){}
+
+    // This method receives a json object and initialize the movie variables whit the data from the json response
     public Movie(JSONObject jsonObject) throws JSONException {
         backdropPath = jsonObject.getString("backdrop_path");
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
+        popularity = jsonObject.getDouble("vote_average");
+        movieId = jsonObject.getInt("id");
     }
 
     // Create a list of movies from the json array
@@ -48,5 +58,13 @@ public class Movie {
 
     public String getOverview() {
         return overview;
+    }
+
+    public double getPopularity() {
+        return popularity;
+    }
+
+    public int getMovieId() {
+        return movieId;
     }
 }
